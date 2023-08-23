@@ -1,7 +1,7 @@
 import { getRandomArrayElement } from '../utils.js';
-import { DESTINATIONS, CITY__DESCRIPTIONS, PHOTO__DESCRIPTIONS } from '../data.js';
+import { DESTINATIONS, CITY__DESCRIPTIONS, PHOTO__DESCRIPTIONS } from './data.js';
 
-function getDestination() {
+function generateDestinations() {
   return {
     id: crypto.randomUUID(),
     description: getRandomArrayElement (CITY__DESCRIPTIONS),
@@ -14,4 +14,4 @@ function getDestination() {
   };
 }
 
-export {getDestination};
+export {generateDestinations};

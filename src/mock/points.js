@@ -1,10 +1,8 @@
 import { getRandomArrayElement, getRandomInteger } from '../utils.js';
-import { PRICE, DATES } from '../data.js';
-import { FAVORITE } from './const.js';
-import { TYPE_POINTS } from '../const.js';
+import { PRICE, DATES } from './data.js';
+import { FAVORITE, TYPE_POINTS } from '../const.js';
 
-
-function getPoints(destinationId, offersId) {
+function generatePoints(destinationId, offersId) {
   const date = getRandomArrayElement(DATES);
 
   return{
@@ -19,4 +17,4 @@ function getPoints(destinationId, offersId) {
   };
 }
 
-export {getPoints};
+export {generatePoints};

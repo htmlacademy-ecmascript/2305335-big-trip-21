@@ -1,9 +1,10 @@
-import {getDestination} from '../mock/destination.js';
-import {getOffers} from '../mock/offer.js';
-import {getPoints} from '../mock/point.js';
+import {generateDestinations} from '../mock/destinations.js';
+import {generateOffers} from '../mock/offers.js';
+import {generatePoints} from '../mock/points.js';
 
-import {DESTINATION_COUNT, OfferCount, POINT_COUNT, TYPES} from '../mock/const.js';
-import {getRandomInteger, getRandomValue} from '../utils.js';
+import {TYPE_POINTS} from '../const.js';
+import {getRandomInteger, getRandomArrayElement} from '../utils.js';
+import {DESTINATIONS_COUNT, POINT_COUNT, OFFERS_COUNT} from '../mock/data.js';
 
 export default class MockService {
   destinations = [];
@@ -29,25 +30,28 @@ export default class MockService {
   }
 
   generateDestinations() {
-    return Array.from({length: DESTINATION_COUNT}, () => generateDestination());
+    return Array.from({length: DESTINATIONS_COUNT}, () => generateDestinations());
   }
 
   generateOffers() {
-    return TYPES.map((type) => ({
+    return TYPE_POINTS.map((type) => ({
       type,
-      offers: Array.from({length: getRandomInteger(OfferCount.MIN, OfferCount.MAX)}, () => generateOffer(type)),
+      offers: Array.from({length: getRandomInteger(0, OFFERS_COUNT)}, () => generateOffers(type)),
     }));
   }
 
   generatePoints() {
     return Array.from({length: POINT_COUNT}, () => {
-      const type = getRandomValue(TYPES);
-      const destination = getRandomValue(this.destinations);
-      const hasOffers = getRandomInteger(0, 1);
-      const offersByType = this.offers.find((offerByType) => offerByType.type === type).offers;
-      const offerIds = (hasOffers) ? offersByType.slice(0, getRandomInteger(OfferCount.MIN, OfferCount.MAX / 2)).map((offer) => offer.id) : [];
+      const type = getRandomArrayElement(TYPE_POINTS);
+      const destination = getRandomArrayElement(this.destinations);
 
-      return generatePoint(type, destination.id, offerIds);
+      const hasOffers = getRandomInteger(0, 1);
+
+      const offersByType = this.offers.find((offerByType) => offerByType.type === type);
+
+      const offerIds = (hasOffers) ? offersByType.offers.slice(0, getRandomInteger(0, OFFERS_COUNT)).map((offer) => offer.id) : [];
+
+      return generatePoints(type, destination.id, offerIds);
     });
   }
 }
