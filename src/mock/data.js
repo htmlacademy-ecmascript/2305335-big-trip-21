@@ -1,4 +1,5 @@
-import { getRandomArrayElement } from '../utils.js';
+const OFFERS_COUNT = 5;
+const DESTINATIONS_COUNT = 5;
 
 const DATE_FORMAT = {
   FULL_DATA: 'DD/MM/YY HH:mm',
@@ -6,25 +7,71 @@ const DATE_FORMAT = {
   MONTH_DAY: 'MMM DD',
 };
 
-const points = [
-  {
-    id: 'f4b62099-293f-4c3d-a702-94eec4a2808c',
-    base_price: 1100,
-    date_from: '2019-07-10T22:55:56.845Z',
-    date_to: '2019-07-11T11:22:13.375Z',
-    destination: 'bfa5cb75-a1fe-4b77-a83c-0e528e910e04',
-    is_favorite: false,
-    offers: [
-      'b4c3e4e6-9053-42ce-b747-e281314baa31'
-    ],
-    type: 'taxi'
-  }
-]
+const DESTINATIONS = [
+  'Paris',
+  'Kyoto',
+  'Venice',
+  'Prague',
+  'Cape Town',
+  'Sydney',
+  'Santorini',
+  'Rio de Janeiro',
+  'Quebec City',
+  'Budapest'
+];
 
-const Destination = {
+const CITY__DESCRIPTIONS = [
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  'Cras aliquet varius magna, non porta ligula feugiat eget.',
+  'Fusce tristique felis at fermentum pharetra.',
+  'Aliquam id orci ut lectus varius viverra.',
+  'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.',
+  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
+  'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.',
+  'Sed sed nisi sed augue convallis suscipit in sed felis.',
+  'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.',
+  'In rutrum ac purus sit amet tempus.'
+];
 
-}
+const PHOTO__DESCRIPTIONS = [
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  'Cras aliquet varius magna, non porta ligula feugiat eget.',
+  'Fusce tristique felis at fermentum pharetra.',
+  'Aliquam id orci ut lectus varius viverra.',
+  'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.',
+  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
+  'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.',
+  'Sed sed nisi sed augue convallis suscipit in sed felis.',
+  'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.',
+  'In rutrum ac purus sit amet tempus.'
+];
 
-const Offers = {
+const PRICE = {
+  MIN: 1,
+  MAX: 5000
+};
 
-}
+const DATES = [
+  [
+    '2019-03-18T12:25:07.777Z',
+    '2019-03-18T13:35:14.144Z',
+  ],
+  [
+    '2019-03-21T12:25:07.777Z',
+    '2019-03-21T13:35:14.144Z',
+  ],
+  [
+    '2019-03-18T14:30:07.777Z',
+    '2019-03-19T16:35:14.144Z',
+  ],
+  [
+    '2019-03-20T16:30:07.777Z',
+    '2019-03-20T17:00:14.144Z',
+  ],
+  [
+    '2019-03-19T12:30:07.777Z',
+    '2019-03-19T15:00:14.144Z',
+  ],
+];
+
+export {DATE_FORMAT, DESTINATIONS, CITY__DESCRIPTIONS, PHOTO__DESCRIPTIONS, PRICE, DATES, OFFERS_COUNT, DESTINATIONS_COUNT};
