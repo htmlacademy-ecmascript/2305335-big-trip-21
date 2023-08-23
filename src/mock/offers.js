@@ -1,8 +1,8 @@
 import { getRandomArrayElement, getRandomInteger } from '../utils.js';
 import { TYPE_POINTS } from '../const.js';
-import { PRICE } from '../data.js';
+import { PRICE } from './data.js';
 
-function getOffers(type) {
+function generateOffers(type) {
   return{
     type: getRandomArrayElement(TYPE_POINTS),
     offers: [
@@ -14,4 +14,4 @@ function getOffers(type) {
   };
 }
 
-export {getOffers};
+export {generateOffers};
