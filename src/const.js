@@ -33,4 +33,10 @@ const DEFAULT__POINT = {
   type: 'taxi'
 };
 
-export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT};
+const DATE_FORMAT = {
+  FULL_DATA: 'DD/MM/YY HH:mm',
+  HOUR_MINUTE: 'HH:mm',
+  MONTH_DAY: 'MMM DD',
+};
+
+export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT};
