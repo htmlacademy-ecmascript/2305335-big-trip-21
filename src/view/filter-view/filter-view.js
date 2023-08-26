@@ -1,13 +1,9 @@
-import { createElement } from '../render.js';
+import { createElement } from '../../render.js';
+import { createFilterTemplate } from './filter-template.js';
 
-function createListTemplate () {
-  return /*html*/ `
-    <ul class="trip-events__list"></ul>`;
-}
-
-export default class ListView {
+export default class FilterView {
   getTemplate() {
-    return createListTemplate();
+    return createFilterTemplate();
   }
 
   getElement() {

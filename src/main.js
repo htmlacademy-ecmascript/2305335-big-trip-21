@@ -1,6 +1,6 @@
-import FilterView from './view/filter-view.js';
-import TripInfoView from './view/trip-info-view.js';
-import BoardPresenter from './presenter/board-presenter.js';
+import FilterView from './view/filter-view/filter-view.js';
+import TripInfoView from './view/trip-info-view/trip-info-view.js';
+import PointsPresenter from './presenter/points-presenter.js';
 
 import PointsModel from './model/point-model.js';
 import OffersModel from './model/offers-model.js';
@@ -18,7 +18,7 @@ const pointsModel = new PointsModel(mockService);
 const offersModel = new OffersModel(mockService);
 const destinationsModel = new DestinationsModel(mockService);
 
-const boardPresenter = new BoardPresenter({
+const pointsPresenter = new PointsPresenter({
   container: eventsListElement,
   pointsModel,
   offersModel,
@@ -28,4 +28,4 @@ const boardPresenter = new BoardPresenter({
 render(new TripInfoView(), infoTripElement, RenderPosition.AFTERBEGIN);
 render(new FilterView(), filterElement);
 
-boardPresenter.init();
+pointsPresenter.init();

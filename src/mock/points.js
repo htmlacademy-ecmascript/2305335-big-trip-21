@@ -2,7 +2,7 @@ import { getRandomArrayElement, getRandomInteger } from '../utils.js';
 import { PRICE, DATES } from './data.js';
 import { FAVORITE, TYPE_POINTS } from '../const.js';
 
-function generatePoints(destinationId, offersId) {
+function generatePoints(type, destinationId, offersId) {
   const date = getRandomArrayElement(DATES);
 
   return{

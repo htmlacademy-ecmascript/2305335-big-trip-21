@@ -1,15 +1,18 @@
 import { getRandomArrayElement } from '../utils.js';
-import { DESTINATIONS, CITY__DESCRIPTIONS, PHOTO__DESCRIPTIONS } from './data.js';
+import { DESTINATIONS, CITY__DESCRIPTIONS } from './data.js';
 
 function generateDestinations() {
+  const destination = getRandomArrayElement (DESTINATIONS);
+  const description = getRandomArrayElement (CITY__DESCRIPTIONS);
+
   return {
     id: crypto.randomUUID(),
-    description: getRandomArrayElement (CITY__DESCRIPTIONS),
-    name: getRandomArrayElement (DESTINATIONS),
+    description,
+    name: destination,
     pictures: [
       {
-        src: `https://loremflickr.com/248/152?random=${crypto.randomUUID()}`,
-        description: getRandomArrayElement(PHOTO__DESCRIPTIONS)
+        'src': `https://loremflickr.com/248/152?random=${crypto.randomUUID()}`,
+        'description': `${destination} description`
       }]
   };
 }
