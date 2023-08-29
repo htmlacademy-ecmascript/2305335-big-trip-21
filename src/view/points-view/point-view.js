@@ -12,8 +12,8 @@ export default class PointView {
   getTemplate() {
     return createPointTemplate({
       point: this.point,
-      destination: this.destination,
-      offers: this.offers
+      pointDestination: this.pointDestination,
+      pointOffers: this.pointOffers
     });
   }
 

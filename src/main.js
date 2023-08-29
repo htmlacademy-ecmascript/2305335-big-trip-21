@@ -19,7 +19,7 @@ const offersModel = new OffersModel(mockService);
 const destinationsModel = new DestinationsModel(mockService);
 
 const pointsPresenter = new PointsPresenter({
-  container: eventsListElement,
+  pointsContainer: eventsListElement,
   pointsModel,
   offersModel,
   destinationsModel
