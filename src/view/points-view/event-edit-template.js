@@ -1,4 +1,3 @@
-import { DEFAULT__POINT } from '../../const.js';
 import { formatToFullDate } from '../../utils.js';
 
 function createTypesListTemplate(offerTypes, type) {
@@ -53,11 +52,10 @@ function createPhotos(photos) {
   return photos.map((photo) => (`<img class="event__photo" src=${photo.src} alt="${photo.description}">`)).join('');
 }
 
-function createEventEditTemplate({ point = DEFAULT__POINT, pointDestination, pointOffers }) {
+function createEventEditTemplate({ point, pointDestinations, pointOffers }) {
   const { dateFrom, dateTo, type, basePrice } = point;
   const offersByType = pointOffers.find((item) => item.type === type).offers;
-  const currentDestination = pointDestination.find((item) => item.id === point.destination);
-
+  const currentDestination = pointDestinations.find((item) => item.id === point.destination);
   return /*html*/ `
   <li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -110,7 +108,7 @@ function createEventEditTemplate({ point = DEFAULT__POINT, pointDestination, poi
 
           <div class="event__photos-container">
             <div class="event__photos-tape">
-              ${createPhotos(pointDestination[0].pictures)}
+              ${createPhotos(pointDestinations[0].pictures)}
             </div>
           </div>
         </section>

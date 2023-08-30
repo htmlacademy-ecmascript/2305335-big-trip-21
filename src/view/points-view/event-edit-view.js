@@ -1,31 +1,48 @@
 import { DEFAULT__POINT } from '../../const.js';
-import { createElement } from '../../render.js';
 import { createEventEditTemplate } from './event-edit-template.js';
+import AbstractView from '../../framework/view/abstract-view.js';
 
-export default class EventEditView {
-  constructor({ point = DEFAULT__POINT, pointDestination, pointOffers }) {
-    this.point = point;
-    this.pointDestination = pointDestination;
-    this.pointOffers = pointOffers;
+export default class EventEditView extends AbstractView {
+  #point = null;
+  #pointDestinations = null;
+  #pointOffers = null;
+  #handleFormSubmit = null;
+  #handleCloseClick = null;
+  #handleDeleteClick = null;
+
+  constructor({ point = DEFAULT__POINT, pointDestinations, pointOffers, onFormSubmit, onCloseButtonClick, onDeleteButtonClick }) {
+    super();
+    this.#point = point;
+    this.#pointDestinations = pointDestinations;
+    this.#pointOffers = pointOffers;
+    this.#handleFormSubmit = onFormSubmit;
+    this.#handleCloseClick = onCloseButtonClick;
+    this.#handleDeleteClick = onDeleteButtonClick;
+    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeClickHandler);
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#deleteClickHandler);
   }
 
-  getTemplate() {
+  get template() {
     return createEventEditTemplate({
-      point: this.point,
-      pointDestination: this.pointDestination,
-      pointOffers: this.pointOffers
+      point: this.#point,
+      pointDestinations: this.#pointDestinations,
+      pointOffers: this.#pointOffers
     });
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
+  };
 
-    return this.element;
-  }
+  #closeClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleCloseClick();
+  };
 
-  removeElement() {
-    this.element = null;
-  }
+  #deleteClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleDeleteClick();
+  };
 }
