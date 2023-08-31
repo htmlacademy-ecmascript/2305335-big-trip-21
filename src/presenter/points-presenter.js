@@ -67,7 +67,7 @@ export default class PointsPresenter {
 
     const eventPointComponent = new PointView({
       point,
-      pointDestinations: this.#destinationsModel.getById(point.destinations),
+      pointDestination: this.#destinationsModel.getById(point.destination),
       pointOffers: this.#offersModel.getByType(point.type),
       onClick: () => {
         replaceItemToForm();
