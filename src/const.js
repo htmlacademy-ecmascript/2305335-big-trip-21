@@ -39,4 +39,19 @@ const DATE_FORMAT = {
   MONTH_DAY: 'MMM DD',
 };
 
-export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT};
+const FILTER_TYPE = [
+  'Everything',
+  'Future',
+  'Present',
+  'Past',
+];
+
+const SORT_TYPE = [
+  'Day',
+  'Event',
+  'Time',
+  'Price',
+  'Offers',
+];
+
+export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT, FILTER_TYPE, SORT_TYPE };
