@@ -2,6 +2,7 @@ import SortView from '../view/sort-view/sort-view.js';
 import ListView from '../view/points-view/list-view.js';
 import EventEditView from '../view/points-view/event-edit-view.js';
 import PointView from '../view/points-view/point-view.js';
+import ListEmptyView from '../view/points-view/list-empty-view.js';
 import { render, replace, remove } from '../framework/render.js';
 
 export default class PointsPresenter {
@@ -12,6 +13,7 @@ export default class PointsPresenter {
   #points = [];
   #sortComponent = new SortView();
   #listComponent = new ListView();
+  #listEmptyComponent = new ListEmptyView();
 
   constructor({ pointsContainer, destinationsModel, offersModel, pointsModel }) {
     this.#pointsContainer = pointsContainer;
@@ -26,9 +28,16 @@ export default class PointsPresenter {
   }
 
   #renderPage() {
+    this.#renderPointList();
+    this.#renderEmptyPointList();
     render(this.#sortComponent, this.#pointsContainer);
     render(this.#listComponent, this.#pointsContainer);
-    this.#renderPointList();
+  }
+
+  #renderEmptyPointList () {
+    if (!this.#points.length){
+      render(this.#listEmptyComponent, this.#pointsContainer);
+    }
   }
 
   #renderPointList() {
