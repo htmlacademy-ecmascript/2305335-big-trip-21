@@ -3,7 +3,12 @@ import ListView from '../view/points-view/list-view.js';
 import EventEditView from '../view/points-view/event-edit-view.js';
 import PointView from '../view/points-view/point-view.js';
 import ListEmptyView from '../view/points-view/list-empty-view.js';
-import { render, replace, remove } from '../framework/render.js';
+import FilterView from '../view/filter-view/filter-view.js';
+import TripInfoView from '../view/trip-info-view/trip-info-view.js';
+import { RenderPosition, render, replace, remove } from '../framework/render.js';
+
+const filterElement = document.querySelector('.trip-controls__filters');
+const infoTripElement = document.querySelector('.trip-main');
 
 export default class PointsPresenter {
   #pointsContainer = null;
@@ -14,37 +19,33 @@ export default class PointsPresenter {
   #sortComponent = new SortView();
   #listComponent = new ListView();
   #listEmptyComponent = new ListEmptyView();
+  #TripInfoComponent = new TripInfoView();
+  #FilterComponent = new FilterView();
 
   constructor({ pointsContainer, destinationsModel, offersModel, pointsModel }) {
     this.#pointsContainer = pointsContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#pointsModel = pointsModel;
-    this.#points = [...this.#pointsModel.points];
   }
 
   init() {
+    this.#points = [...this.#pointsModel.points];
     this.#renderPage();
   }
 
   #renderPage() {
-    this.#renderPointList();
-    this.#renderEmptyPointList();
-    render(this.#sortComponent, this.#pointsContainer);
-    render(this.#listComponent, this.#pointsContainer);
-  }
-
-  #renderEmptyPointList () {
-    if (!this.#points.length){
+    if (!this.#points.length) {
       render(this.#listEmptyComponent, this.#pointsContainer);
-    }
-  }
-
-  #renderPointList() {
-    if (this.#points.length) {
+      render(this.#FilterComponent, filterElement);
+    } else {
       this.#points.forEach((point) => {
         this.#renderPoint(point);
       });
+      render(this.#sortComponent, this.#pointsContainer);
+      render(this.#listComponent, this.#pointsContainer);
+      render(this.#TripInfoComponent, infoTripElement, RenderPosition.AFTERBEGIN);
+      render(this.#FilterComponent, filterElement);
     }
   }
 
