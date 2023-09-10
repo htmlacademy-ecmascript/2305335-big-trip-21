@@ -1,8 +1,8 @@
 import SortView from '../view/sort-view/sort-view.js';
-import ListView from '../view/points-view/list-view.js';
+import ListView from '../view/list-view/list-view.js';
 import EventEditView from '../view/points-view/event-edit-view.js';
 import PointView from '../view/points-view/point-view.js';
-import ListEmptyView from '../view/points-view/list-empty-view.js';
+import ListEmptyView from '../view/list-view/list-empty-view.js';
 import FilterView from '../view/filter-view/filter-view.js';
 import TripInfoView from '../view/trip-info-view/trip-info-view.js';
 import { RenderPosition, render, replace, remove } from '../framework/render.js';
