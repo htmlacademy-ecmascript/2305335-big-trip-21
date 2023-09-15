@@ -24,13 +24,13 @@ const FAVORITE = [
 const DEFAULT_TYPE = 'flight';
 
 const DEFAULT__POINT = {
-  basePrice: 1100,
-  dateFrom: '2019-07-10T22:55:56.845Z',
-  dateTo:  '2019-07-11T11:22:13.375Z',
-  destination: 11,
+  basePrice: 0,
+  dateFrom: null,
+  dateTo: null,
+  destination: null,
   isFavorite: false,
-  offers: [1],
-  type: 'taxi'
+  offers: [],
+  type: DEFAULT_TYPE,
 };
 
 const DATE_FORMAT = {
@@ -39,19 +39,28 @@ const DATE_FORMAT = {
   MONTH_DAY: 'MMM DD',
 };
 
-const FILTER_TYPE = [
-  'Everything',
-  'Future',
-  'Present',
-  'Past',
-];
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past'
+};
 
-const SORT_TYPE = [
-  'Day',
-  'Event',
-  'Time',
-  'Price',
-  'Offers',
-];
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFER: 'offer'
+};
 
-export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT, FILTER_TYPE, SORT_TYPE };
+const enabledSortType = {
+  [SortType.DAY]: true,
+  [SortType.EVENT]: false,
+  [SortType.TIME]: true,
+  [SortType.PRICE]: true,
+  [SortType.OFFER]: false
+};
+
+
+export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT, FilterType, SortType, enabledSortType };
