@@ -1,5 +1,5 @@
 import { DEFAULT__POINT } from '../../const.js';
-import { formatToFullDate, formatToEventDate, formatToEventTime, getPointDuration } from '../../utils.js';
+import { formatToFullDate, formatToEventDate, formatToEventTime, getPointDuration } from '../../utils/utils.js';
 
 function createOffersTemplate(offers) {
   return (/*html*/
@@ -16,12 +16,10 @@ function createOffersTemplate(offers) {
   );
 }
 
-function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOffers }) {
+function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOffer }) {
   const { dateFrom, dateTo, type, basePrice, isFavorite } = point;
 
-  const favoriteClassName = isFavorite
-    ? 'event__favorite-btn event__favorite-btn--active'
-    : 'event__favorite-btn';
+  const favoriteClassName = isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
 
   return (/*html*/
     `<li class="trip-events__item">
@@ -43,7 +41,7 @@ function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOf
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
       </p>
       <h4 class="visually-hidden">Offers:</h4>
-      ${createOffersTemplate(pointOffers)}
+      ${createOffersTemplate(pointOffer)}
       <button class=${favoriteClassName} type="button">
         <span class="visually-hidden">Add to favorite</span>
         <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">

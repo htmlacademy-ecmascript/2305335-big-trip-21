@@ -1,4 +1,4 @@
-import { getRandomArrayElement, getRandomInteger } from '../utils.js';
+import { getRandomArrayElement, getRandomInteger } from '../utils/utils.js';
 import { PRICE, DATES } from './data.js';
 import { FAVORITE, TYPE_POINTS } from '../const.js';
 

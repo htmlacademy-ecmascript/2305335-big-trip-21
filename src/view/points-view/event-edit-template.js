@@ -1,4 +1,5 @@
-import { formatToFullDate } from '../../utils.js';
+import { formatToFullDate } from '../../utils/utils.js';
+import {DEFAULT__POINT} from '../../const.js';
 
 function createTypesListTemplate(offerTypes, type) {
   const offerType = (offerTypes.length === 0) ? '' :
@@ -30,9 +31,9 @@ function createTypesListTemplate(offerTypes, type) {
      </div>`);
 }
 
-function createListOffers(offers) {
+function createListOffers(offers, point) {
   return offers.map((offer) => {
-    const isChecked = !offers.includes(offer.id);
+    const isChecked = point.offers.includes(offer.id);
     const checked = isChecked ? 'checked' : '';
 
     return (/*html*/
@@ -52,7 +53,7 @@ function createPhotos(photos) {
   return photos.map((photo) => (`<img class="event__photo" src=${photo.src} alt="${photo.description}">`)).join('');
 }
 
-function createEventEditTemplate({ point, pointDestinations, pointOffers }) {
+function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, pointOffers }) {
   const { dateFrom, dateTo, type, basePrice } = point;
   const offersByType = pointOffers.find((item) => item.type === type).offers;
   const currentDestination = pointDestinations.find((item) => item.id === point.destination);
@@ -101,7 +102,7 @@ function createEventEditTemplate({ point, pointDestinations, pointOffers }) {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${createListOffers(offersByType)}
+            ${createListOffers(offersByType, point)}
           </div>
         </section>
 
