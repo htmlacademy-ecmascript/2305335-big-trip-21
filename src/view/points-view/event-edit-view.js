@@ -10,14 +10,14 @@ export default class EventEditView extends AbstractView {
   #handleCloseClick = null;
   #handleDeleteClick = null;
 
-  constructor({ point = DEFAULT__POINT, pointDestinations, pointOffers, onFormSubmit, onCloseButtonClick, onDeleteButtonClick }) {
+  constructor({ point = DEFAULT__POINT, pointDestinations, pointOffers, onFormSubmit, onCloseClick, onDeleteClick }) {
     super();
     this.#point = point;
     this.#pointDestinations = pointDestinations;
     this.#pointOffers = pointOffers;
     this.#handleFormSubmit = onFormSubmit;
-    this.#handleCloseClick = onCloseButtonClick;
-    this.#handleDeleteClick = onDeleteButtonClick;
+    this.#handleCloseClick = onCloseClick;
+    this.#handleDeleteClick = onDeleteClick;
     this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeClickHandler);
     this.element.querySelector('.event__reset-btn').addEventListener('click', this.#deleteClickHandler);

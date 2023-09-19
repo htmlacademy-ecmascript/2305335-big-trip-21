@@ -5,7 +5,6 @@ export default class FilterView extends AbstractView {
   #filters = [];
 
   constructor({ filters }) {
-    console.log(filters);
     super();
     this.#filters = filters;
   }

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { Duration, DATE_FORMAT } from './const.js';
+import { Duration, DATE_FORMAT } from '../const.js';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -60,5 +60,18 @@ function getPointDuration(dateFrom, dateTo) {
   return `${days}${hours}${minutes}`.trim();
 }
 
-export { getRandomArrayElement, getRandomInteger, formatToEventDate, formatToFullDate, formatToEventTime, getDate, getPointDuration };
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
+
+export {
+  getRandomArrayElement,
+  getRandomInteger,
+  formatToEventDate,
+  formatToFullDate,
+  formatToEventTime,
+  getDate,
+  getPointDuration,
+  updateItem
+};
 

@@ -62,5 +62,18 @@ const enabledSortType = {
   [SortType.OFFER]: false
 };
 
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
 
-export {TYPE_POINTS, DEFAULT_TYPE, Duration, FAVORITE, DEFAULT__POINT, DATE_FORMAT, FilterType, SortType, enabledSortType };
+export {
+  TYPE_POINTS,
+  DEFAULT_TYPE,
+  Duration, FAVORITE,
+  DEFAULT__POINT,
+  DATE_FORMAT,
+  FilterType,
+  SortType,
+  enabledSortType,
+  Mode };

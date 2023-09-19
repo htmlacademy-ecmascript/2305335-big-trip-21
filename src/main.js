@@ -1,4 +1,4 @@
-import BoardPresenter from './presenter/point-presenter.js';
+import BoardPresenter from './presenter/board-presenter.js';
 import HeaderPresenter from './presenter/header-presenter.js';
 import PointsModel from './model/points-model.js';
 import OffersModel from './model/offers-model.js';

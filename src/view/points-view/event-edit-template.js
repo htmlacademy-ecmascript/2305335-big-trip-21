@@ -1,4 +1,4 @@
-import { formatToFullDate } from '../../utils.js';
+import { formatToFullDate } from '../../utils/utils.js';
 import {DEFAULT__POINT} from '../../const.js';
 
 function createTypesListTemplate(offerTypes, type) {
@@ -57,7 +57,6 @@ function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, po
   const { dateFrom, dateTo, type, basePrice } = point;
   const offersByType = pointOffers.find((item) => item.type === type).offers;
   const currentDestination = pointDestinations.find((item) => item.id === point.destination);
-  console.log(point);
   return /*html*/ `
   <li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -103,7 +102,7 @@ function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, po
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${createListOffers(offersByType)}
+            ${createListOffers(offersByType, point)}
           </div>
         </section>
 

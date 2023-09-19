@@ -1,11 +1,7 @@
 import EventEditView from '../view/points-view/event-edit-view.js';
 import PointView from '../view/points-view/point-view.js';
 import { render, replace, remove } from '../framework/render';
-
-const Mode = {
-  DEFAULT: 'DEFAULT',
-  EDITING: 'EDITING',
-};
+import { Mode } from '../const.js';
 
 export default class PointPresenter {
   #pointsListContainer = null;
@@ -30,6 +26,11 @@ export default class PointPresenter {
     this.#handleDeletedDataChange = onDeletedDataChange;
   }
 
+  destroy() {
+    remove(this.#pointEditComponent);
+    remove(this.#pointComponent);
+  }
+
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
@@ -44,14 +45,14 @@ export default class PointPresenter {
     }
   }
 
-  #replacePointToForm() {
+  #replacePointToForm() { // скрываем точку и открываем форму редактирования
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
     this.#handleModeChange();
     this.#mode = Mode.EDITING;
   }
 
-  #replaceFormToPoint() {
+  #replaceFormToPoint() { // скрываем форму редактирования и открываем точку
     replace(this.#pointComponent, this.#pointEditComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
     this.#mode = Mode.DEFAULT;
