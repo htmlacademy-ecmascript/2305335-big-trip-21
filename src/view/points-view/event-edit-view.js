@@ -75,7 +75,7 @@ export default class EventEditView extends AbstractStatefulView {
     this.#setDatepicker();
   }
 
-  #typeChangeHandler = (evt) => {
+  #typeChangeHandler = (evt) => { // Обработчик события "смена типа точки". Например, тип Ship меняем на Train
     evt.preventDefault();
 
     this.updateElement({
@@ -91,7 +91,7 @@ export default class EventEditView extends AbstractStatefulView {
     );
   };
 
-  #priceChangeHandler = (evt) => {
+  #priceChangeHandler = (evt) => { // Обработчик события "изменение цены"
     evt.preventDefault();
     const priceValue = evt.target.value;
 
@@ -100,50 +100,55 @@ export default class EventEditView extends AbstractStatefulView {
       return;
     }
 
-    this.updateElement({
+    this._setState({
       basePrice: priceValue,
     });
   };
 
-  #destinationChangeHandler = (evt) => {
+  #destinationChangeHandler = (evt) => { // Обработчик события "смена направления (города) точки"
     evt.preventDefault();
-    const selectedDestination = this.#pointDestinations.find((item) => item.name === evt.target.value);
+    const selectedDestination = this.#pointDestinations.find((pointDestination) => pointDestination.name === evt.target.value);
 
     if(!selectedDestination) {
       evt.target.value = '';
+      this.element.querySelector('.event__save-btn').disabled = true;
       return;
     }
+
+    this.element.querySelector('.event__save-btn').disabled = false;
 
     this.updateElement({
       destination: selectedDestination.id
     });
   };
 
-  #formSubmitHandler = (evt) => {
+  #formSubmitHandler = (evt) => { // Обработчик события "нажатие на кнопку "Save" формы редактирования точки"
     evt.preventDefault();
     this.#handleFormSubmit(EventEditView.parseStateToPoint(this._state));
   };
 
-  #closeClickHandler = (evt) => {
+  #closeClickHandler = (evt) => { // Обработчик события "клик по стрелке вверх"
     evt.preventDefault();
     this.#handleCloseClick();
   };
 
-  #deleteClickHandler = (evt) => {
+  #deleteClickHandler = (evt) => { // Обработчик события "удаление формы редактирования точки"
     evt.preventDefault();
     this.#handleDeleteClick();
   };
 
-  #dateFromChangeHandler = ([userDate]) => {
-    this.updateElement({
-      dateFrom: userDate,
+  #dateFromCloseHandler = ([userDate]) => {
+    this._setState({
+      dateFrom: userDate
     });
+    this.#datepickerTo.set('minDate', this._state.dateFrom);
   };
 
-  #dateToChangeHandler = ([userDate]) => {
-    this.updateElement({
-      dateTo: userDate,
+  #dateToCloseHandler = ([userDate]) => {
+    this._setState({
+      dateTo: userDate
     });
+    this.#datepickerFrom.set('maxDate', this._state.dateTo);
   };
 
   #setDatepicker() {
@@ -159,7 +164,7 @@ export default class EventEditView extends AbstractStatefulView {
           enableTime: true,
           minDate: 'today',
           defaultDate: this._state.dateFrom,
-          onChange: this.#dateFromChangeHandler,
+          onChange: this.#dateFromCloseHandler,
         },
       );
 
@@ -170,19 +175,46 @@ export default class EventEditView extends AbstractStatefulView {
           enableTime: true,
           minDate: 'today',
           defaultDate: this._state.dateTo,
-          onChange: this.#dateToChangeHandler,
+          onChange: this.#dateToCloseHandler,
         },
       );
 
     }
+    const dateStartElement = this.element.querySelector('#event-start-time-1');
+    const dateEndElement = this.element.querySelector('#event-end-time-1');
+    const commonConfig = {
+      enableTime: true,
+      dateFormat: 'd/m/y H:i',
+      minuteIncrement: 1,
+      locale: {
+        firstDayOfWeek: 1,
+      },
+      'time_24hr': true,
+    };
+
+    this.#datepickerFrom = flatpickr(dateStartElement,
+      {
+        ...commonConfig,
+        // minDate: 'today',
+        maxDate: this._state.dateTo,
+        defaultDate: this._state.dateFrom,
+        onClose: this.#dateFromCloseHandler,
+      },
+    );
+
+    this.#datepickerTo = flatpickr(dateEndElement,
+      {
+        ...commonConfig,
+        defaultDate: this._state.dateTo,
+        minDate: this._state.dateFrom,
+        onClose: this.#dateToCloseHandler,
+      },
+    );
   }
 
   static parsePointToState(point) {
     return {...point};
   }
 
-  static parseStateToPoint = (state) => {
-    const point = {...state};
-    return point;
-  };
+  static parseStateToPoint = (state) => ({ ...state });
 }
