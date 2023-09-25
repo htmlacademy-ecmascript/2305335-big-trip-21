@@ -152,34 +152,6 @@ export default class EventEditView extends AbstractStatefulView {
   };
 
   #setDatepicker() {
-    if (this._state.dateFrom && this._state.dateTo) {
-
-      const pointStartTime = this.element.querySelector('#event-start-time-1');
-      const pointEndTime = this.element.querySelector('#event-end-time-1');
-
-      this.#datepickerFrom = flatpickr(
-        pointStartTime,
-        {
-          dateFormat: 'd/m/y H:i',
-          enableTime: true,
-          minDate: 'today',
-          defaultDate: this._state.dateFrom,
-          onChange: this.#dateFromCloseHandler,
-        },
-      );
-
-      this.#datepickerTo = flatpickr(
-        pointEndTime,
-        {
-          dateFormat: 'd/m/y H:i',
-          enableTime: true,
-          minDate: 'today',
-          defaultDate: this._state.dateTo,
-          onChange: this.#dateToCloseHandler,
-        },
-      );
-
-    }
     const dateStartElement = this.element.querySelector('#event-start-time-1');
     const dateEndElement = this.element.querySelector('#event-end-time-1');
     const commonConfig = {
