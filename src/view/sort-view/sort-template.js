@@ -19,7 +19,7 @@ function getSortItem({ type, isChecked, isDisabled }) {
   `;
 }
 
-function createSortTemplate(sortItems) {
+function renderSortTemplate(sortItems) {
   return `
     <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
       ${sortItems.map((item) => getSortItem(item)).join('')}
@@ -27,4 +27,4 @@ function createSortTemplate(sortItems) {
   `;
 }
 
-export { createSortTemplate };
+export { renderSortTemplate };

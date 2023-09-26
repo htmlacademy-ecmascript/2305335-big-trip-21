@@ -1,5 +1,5 @@
 import { DEFAULT__POINT } from '../../const.js';
-import { createEventEditTemplate } from './event-edit-template.js';
+import { renderPointEditTemplate } from './event-edit-template.js';
 import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 
 import flatpickr from 'flatpickr';
@@ -28,7 +28,7 @@ export default class EventEditView extends AbstractStatefulView {
   }
 
   get template() {
-    return createEventEditTemplate({
+    return renderPointEditTemplate({
       point: this._state,
       pointDestinations: this.#pointDestinations,
       pointOffers: this.#pointOffers

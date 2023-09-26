@@ -1,4 +1,4 @@
-import { createPointTemplate } from './point-template.js';
+import { renderPointTemplate } from './point-template.js';
 import { DEFAULT__POINT } from '../../const.js';
 import AbstractView from '../../framework/view/abstract-view.js';
 
@@ -21,7 +21,7 @@ export default class PointView extends AbstractView{
   }
 
   get template() {
-    return createPointTemplate({
+    return renderPointTemplate({
       point: this.#point,
       pointDestination: this.#pointDestination,
       pointOffer: this.#pointOffer

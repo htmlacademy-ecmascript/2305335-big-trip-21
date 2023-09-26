@@ -1,4 +1,4 @@
-function createTripInfoTemplate() {
+function renderTripInfoTemplate() {
   return /*html*/ `
   <section class="trip-main__trip-info  trip-info">
     <div class="trip-info__main">
@@ -12,4 +12,4 @@ function createTripInfoTemplate() {
   </section>
   `;
 }
-export { createTripInfoTemplate };
+export { renderTripInfoTemplate };

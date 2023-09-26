@@ -1,7 +1,7 @@
 import { DEFAULT__POINT } from '../../const.js';
 import { formatToFullDate, formatToEventDate, formatToEventTime, getPointDuration } from '../../utils/utils.js';
 
-function createOffersTemplate(offers) {
+function renderOffersTemplate(offers) {
   return (/*html*/
     `<ul class="event__selected-offers">
     ${(offers) ?
@@ -16,7 +16,7 @@ function createOffersTemplate(offers) {
   );
 }
 
-function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOffer }) {
+function renderPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOffer }) {
   const { dateFrom, dateTo, type, basePrice, isFavorite } = point;
 
   const favoriteClassName = isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
@@ -41,7 +41,7 @@ function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOf
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
       </p>
       <h4 class="visually-hidden">Offers:</h4>
-      ${createOffersTemplate(pointOffer)}
+      ${renderOffersTemplate(pointOffer)}
       <button class="${favoriteClassName}" type="button">
         <span class="visually-hidden">Add to favorite</span>
         <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
@@ -55,4 +55,4 @@ function createPointTemplate({ point = DEFAULT__POINT, pointDestination, pointOf
   </li>`
   );
 }
-export { createPointTemplate };
+export { renderPointTemplate };
