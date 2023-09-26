@@ -1,5 +1,3 @@
-//import {FilterType} from '../../const.js';
-
 function renderFilterItemTemplate(filter, isChecked) {
   const { type, count } = filter;
 
@@ -19,7 +17,7 @@ function renderFilterItemTemplate(filter, isChecked) {
   `;
 }
 
-function createFilterTemplate (filterItems) {
+function renderFilterTemplate (filterItems) {
   const filterItemsTemplate = filterItems
     .map((filter, index) => renderFilterItemTemplate(filter, index === 0))
     .join('');
@@ -32,4 +30,4 @@ function createFilterTemplate (filterItems) {
   `;
 }
 
-export { createFilterTemplate };
+export { renderFilterTemplate };

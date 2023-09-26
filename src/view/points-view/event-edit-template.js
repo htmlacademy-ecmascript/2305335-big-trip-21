@@ -1,7 +1,37 @@
 import { formatToFullDate } from '../../utils/utils.js';
 import {DEFAULT__POINT} from '../../const.js';
 
-function createTypesListTemplate(offerTypes, type) {
+function renderListOffers(offers, point) {
+  return offers.map((offer) => {
+    const isChecked = point.offers.includes(offer.id);
+    const checked = isChecked ? 'checked' : '';
+
+    return (/*html*/
+      `<div class="event__offer-selector">
+      <input class="event__offer-checkbox  visually-hidden" id="${offer.id}" type="checkbox" name="${offer.id}" ${checked}>
+      <label class="event__offer-label" for="${offer.id}">
+        <span class="event__offer-title">${offer.title}</span>
+          &plus;&euro;&nbsp;
+        <span class="event__offer-price">${offer.price}</span>
+      </label>
+      </div>`
+    );
+  }).join('');
+}
+
+function renderPictures(pictures) {
+  if (pictures) {
+    return `
+    <div class="event__photos-tape">
+      ${(pictures).map((picture) => `<img class="event__photo" src="${picture.src}" alt="${picture.description}">`).join('')}
+    </div>
+    `;
+  } else {
+    return '';
+  }
+}
+
+function renderTypesListTemplate(offerTypes, type) {
   const offerType = (offerTypes.length === 0) ? '' :
     offerTypes.map((item) => (/*html*/
       `<div class="event__type-item">
@@ -31,37 +61,15 @@ function createTypesListTemplate(offerTypes, type) {
      </div>`);
 }
 
-function createListOffers(offers, point) {
-  return offers.map((offer) => {
-    const isChecked = point.offers.includes(offer.id);
-    const checked = isChecked ? 'checked' : '';
-
-    return (/*html*/
-      `<div class="event__offer-selector">
-      <input class="event__offer-checkbox  visually-hidden" id="${offer.id}" type="checkbox" name="${offer.id}" ${checked}>
-      <label class="event__offer-label" for="${offer.id}">
-        <span class="event__offer-title">${offer.title}</span>
-        &plus;&euro;&nbsp;
-        <span class="event__offer-price">${offer.price}</span>
-      </label>
-      </div>`
-    );
-  }).join('');
-}
-
-function createPhotos(photos) {
-  return photos.map((photo) => (`<img class="event__photo" src=${photo.src} alt="${photo.description}">`)).join('');
-}
-
-function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, pointOffers }) {
-  const { dateFrom, dateTo, type, basePrice } = point;
+function renderPointEditTemplate({ point = DEFAULT__POINT, pointDestinations, pointOffers }) {
+  const { dateFrom, dateTo, type, basePrice, destination } = point;
   const offersByType = pointOffers.find((item) => item.type === type).offers;
-  const currentDestination = pointDestinations.find((item) => item.id === point.destination);
+  const currentDestination = pointDestinations.find((item) => item.id === destination);
   return /*html*/ `
   <li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
-        ${createTypesListTemplate(pointOffers, type)}
+        ${renderTypesListTemplate(pointOffers, type)}
 
         <div class="event__field-group  event__field-group--destination">
           <label class="event__label  event__type-output" for="event-destination-1">
@@ -100,20 +108,15 @@ function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, po
       <section class="event__details">
         <section class="event__section  event__section--offers">
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-
           <div class="event__available-offers">
-            ${createListOffers(offersByType, point)}
+            ${renderListOffers(offersByType, point)}
           </div>
         </section>
-
         <section class="event__section  event__section--destination">
           <h3 class="event__section-title  event__section-title--destination">Destination</h3>
           <p class="event__destination-description">${currentDestination.description}</p>
-
           <div class="event__photos-container">
-            <div class="event__photos-tape">
-              ${createPhotos(pointDestinations[0].pictures)}
-            </div>
+              ${renderPictures(currentDestination.pictures)}
           </div>
         </section>
       </section>
@@ -122,4 +125,4 @@ function createEventEditTemplate({ point = DEFAULT__POINT, pointDestinations, po
   `;
 }
 
-export { createEventEditTemplate };
+export { renderPointEditTemplate };
